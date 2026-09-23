@@ -1,0 +1,27 @@
+{
+  "name": "smart-lead-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "concurrently -k \"vite\" \"wait-on tcp:5173 && electron .\"",
+    "build": "vite build && electron-builder",
+    "preview": "vite preview --host",
+    "package": "electron-builder"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.0.0",
+    "pinia": "^2.1.0",
+    "vue": "^3.5.0",
+    "vue-router": "^4.4.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "concurrently": "^9.0.0",
+    "electron": "^30.0.0",
+    "electron-builder": "^24.13.0",
+    "typescript": "^5.5.0",
+    "vite": "^5.4.0",
+    "wait-on": "^8.0.0"
+  }
+}
