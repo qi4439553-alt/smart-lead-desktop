@@ -32,7 +32,6 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-  // IPC handlers are registered only in the main process.
   require('./ipc');
   createWindow();
 
