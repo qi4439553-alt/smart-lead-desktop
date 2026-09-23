@@ -1,6 +1,6 @@
 {
   "name": "smart-lead-desktop",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "main": "electron/main.js",
   "scripts": {
@@ -23,5 +23,14 @@
     "typescript": "^5.5.0",
     "vite": "^5.4.0",
     "wait-on": "^8.0.0"
+  },
+  "build": {
+    "appId": "com.smartlead.desktop",
+    "productName": "SmartLead Desktop",
+    "directories": { "output": "release" },
+    "files": ["dist/**/*", "electron/**/*", "package.json"],
+    "asar": true,
+    "win": { "target": [{ "target": "nsis", "arch": ["x64"] }] },
+    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true, "createDesktopShortcut": true }
   }
 }

@@ -1,4 +1,4 @@
-const { app, BrowserWindow, shell } = require('electron');
+const { app, BrowserWindow, shell, Notification } = require('electron');
 const path = require('path');
 
 const isDev = !app.isPackaged;
@@ -21,7 +21,6 @@ function createWindow() {
 
   if (isDev) {
     win.loadURL('http://localhost:5173');
-    win.webContents.openDevTools({ mode: 'detach' });
   } else {
     win.loadFile(path.join(__dirname, '../dist/index.html'));
   }
@@ -33,6 +32,8 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+  // IPC handlers are registered only in the main process.
+  require('./ipc');
   createWindow();
 
   app.on('activate', () => {
@@ -41,7 +42,7 @@ app.whenReady().then(() => {
 });
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  if (process.platform !== 'darwin') app.quit();
 });
+
+module.exports = { Notification };
