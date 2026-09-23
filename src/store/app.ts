@@ -1,22 +1,17 @@
 import { defineStore } from 'pinia';
+import { seedComments, seedKeywords, platformCatalog } from '@/lib/platforms';
 
 export const useAppStore = defineStore('app', {
   state: () => ({
-    platformList: [
-      '抖音',
-      '小红书',
-      '快手',
-      'B站',
-      '视频号',
-      '微信',
-      '直播间',
-      '私域矩阵',
-    ],
+    platformList: platformCatalog.map((item) => item.name),
+    platforms: platformCatalog,
     tasks: [
       { id: 1, name: '抖音关键词任务', platform: '抖音', status: '运行中', progress: 76 },
       { id: 2, name: '小红书评论筛选', platform: '小红书', status: '待处理', progress: 42 },
       { id: 3, name: '视频号哨兵', platform: '视频号', status: '已暂停', progress: 15 },
     ],
+    keywords: seedKeywords,
+    comments: seedComments,
     logs: [
       '关键词 “AI工具” 监控项已启动',
       '新评论命中：需要了解报价',
@@ -32,6 +27,12 @@ export const useAppStore = defineStore('app', {
   actions: {
     addTask(task: Record<string, any>) {
       this.tasks.unshift(task);
+    },
+    addKeyword(keyword: Record<string, any>) {
+      this.keywords.unshift(keyword);
+    },
+    addComment(comment: Record<string, any>) {
+      this.comments.unshift(comment);
     },
     appendLog(log: string) {
       this.logs.unshift(log);
